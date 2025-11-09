@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   emailRegex,
   phoneRegex,
@@ -28,10 +28,12 @@ export default function RegistrationForm({ onAdd, isDuplicate }: Props) {
   const [data, setData] = useState<RegistrationFormData>({ ...empty });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // оновлення окремого поля
   const setField = (field: keyof RegistrationFormData, value: string) => {
     setData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // функція валідації
   const validate = (d: RegistrationFormData): Record<string, string> => {
     const e: Record<string, string> = {};
 
@@ -53,23 +55,27 @@ export default function RegistrationForm({ onAdd, isDuplicate }: Props) {
     return e;
   };
 
+  // обробка сабміту
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     const validationErrors = validate(data);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // все добре — додаємо
       onAdd({ id: uuid(), ...data });
-      // очищення
       setData({ ...empty });
       setErrors({});
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-light rounded-3 shadow-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 bg-light rounded-3 shadow-sm"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') handleSubmit(e);
+      }}
+    >
       <h2 className="mb-3">Реєстрація нового учасника</h2>
 
       <FormField label="ПІБ" htmlFor="fullName" error={errors.fullName}>
@@ -112,7 +118,7 @@ export default function RegistrationForm({ onAdd, isDuplicate }: Props) {
         />
       </FormField>
 
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary w-100">
         Save
       </button>
     </form>

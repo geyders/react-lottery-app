@@ -13,15 +13,5 @@ export function uuid(): string {
   return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);
 }
 
-/** Приводимо email до нижнього регістру і обрізаємо пробіли */
-export function normalizeEmail(email: string): string {
-  return (email || '').trim().toLowerCase();
-}
-
-/** Залишаємо тільки цифри і, якщо була, початковий + */
-export function normalizePhone(phone: string): string {
-  const trimmed = (phone || '').trim();
-  const hasPlus = trimmed.startsWith('+');
-  const digits = trimmed.replace(/\D/g, '');
-  return hasPlus ? `+${digits}` : digits;
-}
+export const normalizeEmail = (email: string) => (email || '').trim().toLowerCase();
+export const normalizePhone = (phone: string) => (phone || '').trim().replace(/\D/g, '');

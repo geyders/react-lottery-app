@@ -1,0 +1,40 @@
+// ❌ не підключай sass:math або sass:color вручну — Bootstrap робить це сам!
+
+// 1️⃣ Функції Bootstrap
+@import "bootstrap/scss/functions";
+
+// 2️⃣ Міксіни — щоб _assert-ascending був доступний до variables
+@import "bootstrap/scss/mixins";
+
+// 3️⃣ Змінні, карти, утиліти
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/utilities";
+
+// 4️⃣ Основні модулі Bootstrap
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// 5️⃣ Твої власні стилі
+body {
+  background-color: #f8f9fa;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.btn-primary {
+    margin: 10px 0;
+}
